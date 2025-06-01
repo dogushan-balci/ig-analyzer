@@ -15,7 +15,7 @@ A web-based tool for analyzing Instagram profiles and generating insights about 
 
 ## Live Demo
 
-[View Live Demo](https://dogushanbalci.com/ig-analyzer)
+[View Live Demo](https://dogushanbalci.com/tools/ig-analyzer)
 
 ## Installation
 
