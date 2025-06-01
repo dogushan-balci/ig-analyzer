@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Follower Analysis Tool - Find Who Unfollow You </title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Instagram Follower Analysis Tool</h1>
+            <p>Discover who's following you back with our simple and secure Instagram follower analysis tool. Analyze your followers and following lists to manage your Instagram connections effectively.</p>
+            
+            <div class="help-section">
+                <button class="help-btn" onclick="toggleHelp()">
+                    <i class="fas fa-question-circle"></i>
+                    How to Use?
+                </button>
+                
+                <div class="help-content" id="helpContent">
+                    <div class="help-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Access Your Instagram Data</h3>
+                                <ul>
+                                    <li>Go to your <strong>Profile</strong> page on Instagram.</li>
+                                    <li><strong>Settings</strong> > <strong>Accounts Center</strong> > <strong>Your Information and Permissions</strong> > <strong>Download Your Information</strong>.</li>
+                                    <li>Click on the <strong>Download or Transfer Your Information</strong> button.</li>
+                                    <li>Select <strong>Some of Your Information</strong> option.</li>
+                                    <li>Check <strong>Followers and Following</strong> from the list and click <strong>Next</strong>.</li>
+                                    <li>Click the <strong>Download to Device</strong> button.</li>
+                                    <li>Select <strong>All Time</strong> from the date range.</li>
+                                    <li>Click the <strong>Create Files</strong> button.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Download the Files</h3>
+                                <ul>
+                                    <li>Wait for the files to be created (this may take a few minutes).</li>
+                                    <li>You'll see an <strong>Download</strong> button on the <strong>Download Your Information</strong> screen.</li>
+                                    <li>Click the <strong>Download</strong> button to save the ZIP file to your computer.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Prepare the Files</h3>
+                                <ul>
+                                    <li>Extract the downloaded ZIP file.</li>
+                                    <li>Locate the <code>followers_1.html</code> and <code>following.html</code> files.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Analyze Your Data</h3>
+                                <ul>
+                                    <li>Drag the <code>followers_1.html</code> file to the "Followers File" area.</li>
+                                    <li>Drag the <code>following.html</code> file to the "Following File" area.</li>
+                                    <li>Click the <strong>Analyze Data</strong> button.</li>
+                                    <li>View your results in different tabs:
+                                        <ul class="sub-list">
+                                            <li><strong>Not Following Back:</strong> Users who don't follow you back.</li>
+                                            <li><strong>Not Following:</strong> Users you don't follow.</li>
+                                            <li><strong>Followers:</strong> All your followers.</li>
+                                            <li><strong>Following:</strong> All users you follow.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-box">
+                    <h2>Followers File</h2>
+                    <div class="file-upload" id="followers-upload">
+                        <input type="file" id="followers-file" accept=".html" required>
+                        <label for="followers-file">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choose followers_1.html file</span>
+                        </label>
+                        <div class="file-info" id="followers-info"></div>
+                    </div>
+                </div>
+
+                <div class="upload-box">
+                    <h2>Following File</h2>
+                    <div class="file-upload" id="following-upload">
+                        <input type="file" id="following-file" accept=".html" required>
+                        <label for="following-file">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choose following.html file</span>
+                        </label>
+                        <div class="file-info" id="following-info"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="analyze-btn" class="analyze-btn" disabled>
+                <i class="fas fa-chart-bar"></i>
+                Analyze Data
+            </button>
+
+            <div class="results-section" id="results" style="display: none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="not-following-back">
+                        <i class="fas fa-user-times"></i>
+                        Not Following Back
+                    </button>
+                    <button class="tab-btn" data-tab="not-following">
+                        <i class="fas fa-user-slash"></i>
+                        Not Following
+                    </button>
+                    <button class="tab-btn" data-tab="followers">
+                        <i class="fas fa-users"></i>
+                        Followers
+                    </button>
+                    <button class="tab-btn" data-tab="following">
+                        <i class="fas fa-user-plus"></i>
+                        Following
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="not-following-back">
+                        <h3>Users Not Following You Back</h3>
+                        <div class="user-list" id="not-following-back-list"></div>
+                    </div>
+                    <div class="tab-pane" id="not-following">
+                        <h3>Users You're Not Following</h3>
+                        <div class="user-list" id="not-following-list"></div>
+                    </div>
+                    <div class="tab-pane" id="followers">
+                        <h3>Your Followers</h3>
+                        <div class="user-list" id="followers-list"></div>
+                    </div>
+                    <div class="tab-pane" id="following">
+                        <h3>Users You're Following</h3>
+                        <div class="user-list" id="following-list"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Created by <a href="https://dogushanbalci.com" target="_blank">Doğuşhan BALCI</a></p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
